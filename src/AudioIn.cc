@@ -76,13 +76,13 @@ public:
     inParams.hostApiSpecificStreamInfo = NULL;
 
     double sampleRate = (double)mAudioOptions->sampleRate();
-    uint32_t framesPerBuffer = paFramesPerBufferUnspecified;
 
     #ifdef __arm__
-    framesPerBuffer = 256;
     inParams.suggestedLatency = Pa_GetDeviceInfo(inParams.device)->defaultHighInputLatency;
     #endif
 
+    uint32_t framesPerBuffer = mAudioOptions->framesPerBuffer();
+    
     errCode = Pa_OpenStream(&mStream, &inParams, NULL, sampleRate,
                             framesPerBuffer, paNoFlag, cb, this);
     if (errCode != paNoError) {
