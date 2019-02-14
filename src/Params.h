@@ -18,6 +18,7 @@
 
 #include <nan.h>
 #include <sstream>
+#include <portaudio.h>
 
 using namespace v8;
 
@@ -77,7 +78,8 @@ public:
       mSampleRate(unpackNum(tags, "sampleRate", 44100)),
       mChannelCount(unpackNum(tags, "channelCount", 2)),
       mSampleFormat(unpackNum(tags, "sampleFormat", 8)),
-      mMaxQueue(unpackNum(tags, "maxQueue", 2))
+      mMaxQueue(unpackNum(tags, "maxQueue", 2)),
+      mFramesPerBuffer(unpackNum(tags, "framesPerBuffer", paFramesPerBufferUnspecified))
   {}
   ~AudioOptions() {}
 
@@ -86,6 +88,7 @@ public:
   uint32_t channelCount() const  { return mChannelCount; }
   uint32_t sampleFormat() const  { return mSampleFormat; }
   uint32_t maxQueue() const  { return mMaxQueue; }
+  uint32_t framesPerBuffer() const  { return mFramesPerBuffer; }
 
   std::string toString() const  { 
     std::stringstream ss;
@@ -97,6 +100,7 @@ public:
     ss << "sample rate " << mSampleRate << ", ";
     ss << "channels " << mChannelCount << ", ";
     ss << "bits per sample " << mSampleFormat << ", ";
+    ss << "frames per buffer " << mFramesPerBuffer << ", ";
     ss << "max queue " << mMaxQueue;
     return ss.str();
   }
@@ -107,6 +111,7 @@ private:
   uint32_t mChannelCount;
   uint32_t mSampleFormat;
   uint32_t mMaxQueue;
+  uint32_t mFramesPerBuffer;
 };
 
 } // namespace streampunk
