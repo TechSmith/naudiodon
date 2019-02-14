@@ -49,10 +49,9 @@ function AudioInput(options) {
 
   this.start = () => this.AudioInAdon.start();
   this.quit = cb => {
-    const quitCb = arguments[0];
     this.AudioInAdon.quit(() => {
-      if (typeof quitCb === 'function')
-        quitCb();
+      if (typeof cb === 'function')
+        cb();
     });
   }
 }
@@ -75,10 +74,9 @@ function AudioOutput(options) {
   this.start = () => this.AudioOutAdon.start();
   this.quit = cb => {
     Active = false;
-    const quitCb = arguments[0];
     this.AudioOutAdon.quit(() => {
-      if (typeof quitCb === 'function')
-        quitCb();
+      if (typeof cb === 'function')
+        cb();
     });
   }
   this.on('finish', () => { if (Active) this.quit(); });
