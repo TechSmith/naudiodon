@@ -84,10 +84,9 @@ public:
     outParams.hostApiSpecificStreamInfo = NULL;
 
     double sampleRate = (double)mAudioOptions->sampleRate();
-    uint32_t framesPerBuffer = paFramesPerBufferUnspecified;
+    uint32_t framesPerBuffer = mAudioOptions->framesPerBuffer();
 
     #ifdef __arm__
-    framesPerBuffer = 256;
     outParams.suggestedLatency = Pa_GetDeviceInfo(outParams.device)->defaultHighOutputLatency;
     #endif
 
