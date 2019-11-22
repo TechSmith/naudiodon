@@ -13,12 +13,14 @@
   limitations under the License.
 */
 
-#ifndef GETDEVICES_H
-#define GETDEVICES_H
+#ifndef GETHOSTAPIS_H
+#define GETHOSTAPIS_H
+
+#include <napi.h>
 
 namespace streampunk {
 
-Napi::Value GetDevices(const Napi::CallbackInfo& info);
+Napi::Object GetHostAPIs(const Napi::CallbackInfo& info);
 
 } // namespace streampunk
 
